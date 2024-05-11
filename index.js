@@ -1,28 +1,17 @@
-function reorderList(head) {
-  if (!head || !head.next) return;
-  let slow = head;
-  let fast = head;
-  while (fast.next && fast.next.next) {
-    slow = slow.next;
-    fast = fast.next.next;
+function countPrimes(n) {
+  const isPrime = new Array(n).fill(true);
+  isPrime[0] = false;
+  isPrime[1] = false;
+  for (let i = 2; i * i < n; i++) {
+    if (isPrime[i]) {
+      for (let j = i * i; j < n; j += i) {
+        isPrime[j] = false;
+      }
+    }
   }
-  let prev = null;
-  let curr = slow.next;
-  slow.next = null;
-  while (curr) {
-    const next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
+  let count = 0;
+  for (let i = 2; i < n; i++) {
+    if (isPrime[i]) count++;
   }
-  let first = head;
-  let second = prev;
-  while (second) {
-    const nextFirst = first.next;
-    const nextSecond = second.next;
-    first.next = second;
-    second.next = nextFirst;
-    first = nextFirst;
-    second = nextSecond;
-  }
+  return count;
 }
