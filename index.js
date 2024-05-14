@@ -1,4 +1,4 @@
-function findKthLargest(nums, k) {
-  nums.sort((a, b) => b - a);
-  return nums[k - 1];
+function maxDepth(root) {
+  if (!root) return 0;
+  return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 }
